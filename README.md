@@ -115,3 +115,9 @@ The most suited case for this would be CSV files for each type of clusters.
 #### Storing the generated graphs
 
 Short answer would be: **Adding them to the github repository and embedding them in a markdown.**
+
+
+For later use:
+ - https://plot.ly/python/time-series/#reference
+ - https://realpython.com/python-csv/
+ - https://guides.github.com/features/mastering-markdown/
