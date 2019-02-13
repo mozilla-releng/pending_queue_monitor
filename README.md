@@ -99,13 +99,12 @@ We are going to do a request once at 5-10 minutes, so that would be 10-12 reques
 
 For the moment we want to display a few graphs with fixed time-base:
 - one day
-- two days
 - one week
-- two weeks
 - one month
 - 3 months
 - 6 months
 - 1 year
+- All time
 
 ### Storing data
 
