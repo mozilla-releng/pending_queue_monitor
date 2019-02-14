@@ -4,6 +4,7 @@ Be sure to check it out!
 
 """
 import json
+
 from modules.collect_queues import extract_queue
 
 
@@ -23,7 +24,7 @@ def handle_releng_hardware(worker_list):
                         .get("releng-hardware")
                         .get("clusters")
                         .get(str(key)))
-
+    print(url_list)
     for url in url_list:
         print("Cluster URL: ", url)
         print(extract_queue(url))
@@ -45,7 +46,7 @@ def handle_aws_provisioned_hardware(worker_list):
                         .get("aws_provisioner")
                         .get("clusters")
                         .get(str(key)))
-
+    print(url_list)
     for url in url_list:
         print("Cluster URL: ", url)
         print(extract_queue(url))
