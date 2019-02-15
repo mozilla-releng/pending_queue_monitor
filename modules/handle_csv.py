@@ -1,48 +1,81 @@
-import csv, json
+"""
+These functions handle all of the things related to the CSV files including
+reading, writing and generation/updating of the CSV files.
+"""
+import csv
 
 
-def generate_cluster_keys(cluster_type, logger=False):
+def csv_is_empty(file_name):
+    with open(file_name, mode="r") as csv_file:
+        csv_dict = [row for row in csv.DictReader(csv_file)]
+    if len(csv_dict) == 0:
+        return True
+
+
+def write_header(file_name, clusters, header):
+    if csv_is_empty(file_name):
+
+        for cluster in clusters:
+            header.append(cluster)
+
+        with open(file_name, mode="w") as csv_file:
+            csv_file.write(",".join(map(str, header)) + "\n")
+            csv_file.close()
+
+
+def generate_cluster_keys(cluster_type, provisioned, logger=False):
+    """
+
+    :param cluster_type:
+    :param provisioned:
+    :param logger:
+    :return:
+    """
     clusters = []
-    if cluster_type is "releng-hardware" or "aws_provisioner":
+    if cluster_type == "releng-hardware" or cluster_type == "aws_provisioner":
         for key in provisioned.get(cluster_type).get("clusters"):
             clusters.append(provisioned
                             .get(cluster_type)
                             .get("clusters")
                             .get(str(key)))
     else:
-        print("No valid cluster was choosen... \nExiting...")
+        if logger:
+            print("No valid cluster was choosen... \nExiting...")
         exit()
     return clusters
 
 
 def write_csv_file(file_name, data, provisioned, logger=False):
-    clusters = []
-    if file_name is "releng_hardware_data.csv":
-        clusters = generate_cluster_keys("releng-hardware", logger)
+    """
 
-    elif file_name is "aws_provisioner_data.csv":
-        clusters = generate_cluster_keys("aws_provisioner", logger)
+    :param file_name: file that needs to be written to.
+    :param data: needs to be a dictionary with the proper keys.
+    :param provisioned: configuration file.
+    :param logger:
+    :return:
+    """
+    clusters = []
+
+    if file_name == "./csv_data/releng_hardware_data.csv":
+        clusters = generate_cluster_keys("releng-hardware", provisioned,
+                                         logger)
+
+    elif file_name == "./csv_data/aws_provisioner_data.csv":
+        clusters = generate_cluster_keys("aws_provisioner", provisioned,
+                                         logger)
     else:
         if logger:
             print("No valid file name has been chosen... \nExiting...")
         exit()
+
+    header = ["date", ]
     if clusters:
-        with open(file_name, mode="w") as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=clusters)
+        write_header(file_name, clusters, header)
+        pass
 
-            writer.writeheader()
-            writer.writerow()
+    for cluster in clusters:
+        header.append(cluster)
 
-
-if __name__ == "__main__":
-    try:
-        provisioned_data = open("../provisioners.json").read()
-        provisioned = json.loads(provisioned_data)
-
-    except IOError:
-        print("Cannot read provisioners.json file.")
-        exit()
-
-    data = "test_string"
-    write_csv_file(".csv_data/test.csv", data, provisioned, logger=True)
-
+    with open(file_name, mode="a") as csv_file:
+        csv_file.write(",".join(map(str, data)) + "\n")
+        csv_file.close()
