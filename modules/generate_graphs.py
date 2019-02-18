@@ -5,7 +5,7 @@ import pandas as pd
 
 def generate_html_graphs():
     py.offline.init_notebook_mode(connected=True)
-    df = pd.read_csv("../csv_data/releng_hardware_data.csv")
+    df = pd.read_csv("./csv_data/releng_hardware_data.csv")
 
     layout = go.Layout(
         title="RelEng Hardware",
@@ -106,4 +106,4 @@ def generate_html_graphs():
     fig = go.Figure(data=[windows, linux, yosemite, windows_ux, linux_beta,
                           yosemite_beta], layout=layout)
 
-    py.offline.plot(fig, filename="../deploy/index.html")
+    py.offline.plot(fig, filename="./deploy/index.html")
