@@ -2,3 +2,4 @@ plotly
 pandas
 requests
 IPython
+flask

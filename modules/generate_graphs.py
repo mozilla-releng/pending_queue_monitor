@@ -55,4 +55,4 @@ def generate_html_graphs():
 
     fig = dict(data=data, layout=layout)
 
-    py.offline.plot(fig, filename="./deploy/index.html", auto_open=False)
+    py.offline.plot(fig, filename="./static/index.html", auto_open=False)
