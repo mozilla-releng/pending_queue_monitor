@@ -41,7 +41,6 @@ def generate_html_graphs():
         ),
     )
 
-
     windows = go.Scatter(
         x=df["date"],
         y=df["gecko-t-win10-64-ms"],
@@ -106,4 +105,4 @@ def generate_html_graphs():
     fig = go.Figure(data=[windows, linux, yosemite, windows_ux, linux_beta,
                           yosemite_beta], layout=layout)
 
-    py.offline.plot(fig, filename="./deploy/index.html")
+    py.offline.plot(fig, filename="./deploy/index.html", auto_open=False)
