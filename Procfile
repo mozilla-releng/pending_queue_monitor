@@ -1,2 +1,2 @@
-worker: python client.py
+worker: python client.py -v
 web: python webserver.py

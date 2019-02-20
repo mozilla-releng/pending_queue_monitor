@@ -5,8 +5,10 @@ Be sure to check it out!
 """
 import json
 import time
-from modules.handle_hardware import handle_releng_hardware, \
-     handle_aws_provisioned_hardware
+from sys import argv
+from modules import config
+from modules.handle_hardware import handle_releng_hardware
+from modules.handle_hardware import handle_aws_provisioned_hardware
 from modules.generate_graphs import generate_html_graphs
 
 
@@ -24,11 +26,14 @@ def main():
         exit()
 
     handle_releng_hardware(provisioned)
-    # handle_aws_provisioned_hardware(provisioned)
+    handle_aws_provisioned_hardware(provisioned)
     generate_html_graphs()
 
 
 if __name__ == "__main__":
+    if "-v" in argv:
+        config.VERBOSE = True
+
     while True:
         main()
         time.sleep(60)
