@@ -4,12 +4,12 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/', method="GET")
+@app.route('/')
 def root():
     return app.send_static_file('index.html')
 
 
-@app.route('/random', method="GET")
+@app.route('/random')
 def random():
     return app.send_static_file('random.html')
 
