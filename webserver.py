@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 from modules.generate_graphs import generate_html_graphs
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def root():
     generate_html_graphs()
-    return app.send_static_file('index.html')
+    return render_template("index.html")
 
 
 @app.route('/random')

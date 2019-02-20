@@ -65,4 +65,4 @@ def generate_html_graphs():
     if VERBOSE:
         print("Rebuilding Graph Data.")
 
-    py.offline.plot(fig, include_plotlyjs="cdn", filename="./static/index.html", auto_open=True)
+    py.offline.plot(fig, include_plotlyjs="cdn", filename="./templates/index.html", auto_open=True)
