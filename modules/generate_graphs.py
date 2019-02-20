@@ -3,6 +3,7 @@ import plotly.graph_objs as go
 import pandas as pd
 from datetime import datetime as dt
 from datetime import timedelta as td
+from modules.config import VERBOSE
 
 
 def generate_html_graphs():
@@ -60,5 +61,8 @@ def generate_html_graphs():
     one_day = [dt.now() - td(1), dt.now()]
     # Set default default graph view to 1 day.
     fig['layout']['xaxis'].update(range=one_day)
-    print("Web Force Rebuild!")
+
+    if VERBOSE:
+        print("Rebuilding Graph Data.")
+
     py.offline.plot(fig, include_plotlyjs="cdn", filename="./static/index.html", auto_open=True)
