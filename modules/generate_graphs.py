@@ -1,6 +1,8 @@
 import plotly as py
 import plotly.graph_objs as go
 import pandas as pd
+from datetime import datetime as dt
+from datetime import timedelta as td
 
 
 def generate_html_graphs():
@@ -37,7 +39,7 @@ def generate_html_graphs():
                  stepmode='backward'),
             dict(step='all')])),
             rangeslider=dict(visible=False),
-            type='date'
+            type='date',
         ),
     )
     data = []
@@ -55,4 +57,8 @@ def generate_html_graphs():
 
     fig = dict(data=data, layout=layout)
 
-    py.offline.plot(fig, include_plotlyjs="cdn", filename="./static/index.html", auto_open=False)
+    one_day = [dt.now() - td(1), dt.now()]
+    # Set default default graph view to 1 day.
+    fig['layout']['xaxis'].update(range=one_day)
+    print("Web Force Rebuild!")
+    py.offline.plot(fig, include_plotlyjs="cdn", filename="./static/index.html", auto_open=True)
