@@ -40,7 +40,7 @@ def generate_cluster_keys(cluster_type, provisioned, logger=False):
                             .get(str(key)))
     else:
         if logger:
-            print("No valid cluster was choosen... \nExiting...")
+            print("No valid cluster was chosen... \nExiting...")
         exit()
     return clusters
 
