@@ -4,9 +4,14 @@ import os
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', method="GET")
 def root():
     return app.send_static_file('index.html')
+
+
+@app.route('/random', method="GET")
+def random():
+    return app.send_static_file('random.html')
 
 
 if __name__ == '__main__':
