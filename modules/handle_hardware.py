@@ -72,15 +72,18 @@ def handle_aws_provisioned_hardware(worker_list):
                         .get(str(key)))
 
     for url in url_list:
+        if config.VERBOSE:
+            print("Working on:", url)
         response_list.append(extract_queue(url))
 
-    print("Cluster list", cluster_list)
-    print("Response list", response_list)
+    if config.VERBOSE:
+        print("Cluster list", cluster_list)
+        print("Response list", response_list)
 
-    response_dictionary = {cluster: response for cluster, response in
-                           zip(cluster_list, response_list)}
+        response_dictionary = {cluster: response for cluster, response in
+                               zip(cluster_list, response_list)}
 
-    print("Response dictionary:", response_dictionary)
+        print("Response dictionary:", response_dictionary)
 
     write_csv_file("./csv_data/aws_provisioner_data.csv", response_list,
                    worker_list, True)

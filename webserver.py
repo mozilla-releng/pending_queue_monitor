@@ -1,19 +1,27 @@
-from flask import Flask, render_template
 import os
-from modules.generate_graphs import generate_html_graphs
+from flask import Flask
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def root():
-    generate_html_graphs()
-    return render_template("index.html")
+    return app.send_static_file("index.html")
 
 
 @app.route('/random')
 def random():
     return app.send_static_file('random.html')
+
+
+@app.route('/releng')
+def releng():
+    return app.send_static_file('releng.html')
+
+
+@app.route('/aws')
+def aws():
+    return app.send_static_file('aws.html')
 
 
 if __name__ == '__main__':

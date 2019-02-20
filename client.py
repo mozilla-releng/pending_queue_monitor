@@ -26,7 +26,7 @@ def main():
         exit()
 
     handle_releng_hardware(provisioned)
-    # handle_aws_provisioned_hardware(provisioned)
+    handle_aws_provisioned_hardware(provisioned)
     generate_html_graphs()
 
 
