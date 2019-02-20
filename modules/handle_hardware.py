@@ -1,6 +1,7 @@
 import datetime
 from modules.collect_queues import extract_queue
 from modules.handle_csv import write_csv_file
+from modules import config
 
 
 def handle_releng_hardware(worker_list):
@@ -29,14 +30,17 @@ def handle_releng_hardware(worker_list):
                         .get(str(key)))
 
     for url in url_list:
+        if config.VERBOSE:
+            print("Working on:", url)
         response_list.append(extract_queue(url))
 
-    print("Cluster list", cluster_list)
-    print("Response list", response_list)
+    if config.VERBOSE:
+        print("Cluster list", cluster_list)
+        print("Response list", response_list)
 
-    response_dictionary = {cluster: response for cluster, response in
-                           zip(cluster_list, response_list)}
-    print("Response dictionary:", response_dictionary)
+        response_dictionary = {cluster: response for cluster, response in
+                               zip(cluster_list, response_list)}
+        print("Response dictionary:", response_dictionary)
 
     write_csv_file("./csv_data/releng_hardware_data.csv", response_list,
                    worker_list, True)
