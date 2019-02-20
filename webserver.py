@@ -1,11 +1,13 @@
 from flask import Flask
 import os
+from modules.generate_graphs import generate_html_graphs
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def root():
+    generate_html_graphs()
     return app.send_static_file('index.html')
 
 
